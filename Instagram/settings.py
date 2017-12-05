@@ -88,7 +88,7 @@ DATABASES = {
         'USER': str(getVariable('RDS_USER')),
         'PASSWORD': str(getVariable('RDS_PASSWORD')),
         'HOST': str(getVariable('RDS_HOST')),
-        'PORT': str(getVariable('RDS_PORT')),
+        'PORT': int(getVariable('RDS_PORT')),
     }
 }
 
