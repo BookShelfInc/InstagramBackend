@@ -1,7 +1,8 @@
 def getVariable(var):
     keys = {}
     with open('.env', 'r') as file:
-        line = file.readline()
-        line = line.split('=')
-        keys[line[0]] = line[1]
+        lines = file.readlines()
+        for line in lines:
+            line = line.split('=')
+            keys[line[0]] = line[1]
     return (keys[var] if(var in keys.keys()) else None)

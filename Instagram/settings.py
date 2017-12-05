@@ -84,11 +84,11 @@ WSGI_APPLICATION = 'Instagram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': str(getVariable('RDS_NAME')),
-        'USER': str(getVariable('RDS_USER')),
-        'PASSWORD': str(getVariable('RDS_PASSWORD')),
-        'HOST': str(getVariable('RDS_HOST')),
-        'PORT': int(getVariable('RDS_PORT')),
+        'NAME': getVariable('RDS_NAME'),
+        'USER': getVariable('RDS_USER'),
+        'PASSWORD': getVariable('RDS_PASSWORD'),
+        'HOST': getVariable('RDS_HOST'),
+        'PORT': getVariable('RDS_PORT'),
     }
 }
 
