@@ -6,7 +6,7 @@ from .env_variables import getVariable
 
 def uploadImageUser(username, file_image):
     s3 = boto3.client('s3')
-    fileName = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    fileName = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '.jpg'
 
     output = os.path.join("/tmp/", fileName)
     with open(output, "wb") as file:
