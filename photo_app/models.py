@@ -36,3 +36,13 @@ class Comment(models.Model):
     def __str__(self):
         return self.author.username + ' ' + self.comment + ' ' + str(self.id)
 
+class Bookmark(models.Model):
+    photo = models.ForeignKey(Photo, blank=False, null=False, related_name='bookmarks', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=False, null=False, related_name='bookmarks',
+                             on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (('photo', 'user'))
+
+    def __str__(self):
+        return self.user.username

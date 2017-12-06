@@ -40,7 +40,7 @@ def getImagesByUser(request, pk):
 def uploadImage(request):
     if(request.method == 'POST'):
         if('image' in request.FILES):
-            photo_path_ = uploadImageUser(request.user.username, request.FILES['image'], request.FILES['image'].name)
+            photo_path_ = uploadImageUser(request.user.username, request.FILES['image'])
 
             photo = Photo(user_id=request.user, photo_path=photo_path_)
             photo.save()

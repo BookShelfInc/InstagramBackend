@@ -1,10 +1,12 @@
 import boto3
 import os
+import datetime
 
 from .env_variables import getVariable
 
-def uploadImageUser(username, file_image, fileName):
+def uploadImageUser(username, file_image):
     s3 = boto3.client('s3')
+    fileName = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     output = os.path.join("/tmp/", fileName)
     with open(output, "wb") as file:
