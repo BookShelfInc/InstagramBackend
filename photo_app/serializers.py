@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from auth_app.serializers import UserSerializer
+from auth_app.serializers import UserSerializer, UserPhotoSerializer
 from .models import Photo, Comment, Like
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -22,9 +22,28 @@ class LikeSerializer(serializers.ModelSerializer):
             'user'
         )
 
+class CommentPhotoSerializer(serializers.ModelSerializer):
+    author = UserPhotoSerializer()
+    class Meta:
+        model = Comment
+        fields = (
+            'comment',
+            'author',
+            'photo'
+        )
+
+class LikePhotoSerializer(serializers.ModelSerializer):
+    user = UserPhotoSerializer()
+    class Meta:
+        model = Like
+        fields = (
+            'photo',
+            'user'
+        )
+
 class PhotoSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True)
-    likes = LikeSerializer(many=True)
+    comments = CommentPhotoSerializer(many=True)
+    likes = LikePhotoSerializer(many=True)
     class Meta:
         model = Photo
         fields = (
