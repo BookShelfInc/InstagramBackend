@@ -10,6 +10,9 @@ from auth_app.serializers import FollowsSerializer, UserSerializer
 
 from photo_app.models import Photo
 
+from AWS.env_variables import getVariable
+from AWS.api_gateway import cropImage
+
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication, ])
 @permission_classes([IsAuthenticated, ])
@@ -20,6 +23,11 @@ def addAvatar(request, pk):
             photo = Photo.objects.get(pk=pk)
             user.photo = photo
             user.save()
+
+            imageName = photo.photo_path.replace(getVariable('s3BucketPath'))
+            photo.photo_small_path = cropImage(imageName)
+            photo.save()
+
             return HttpResponse(status=200)
         except Photo.DoesNotExist:
             return HttpResponse(status=404)
