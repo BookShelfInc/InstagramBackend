@@ -39,6 +39,9 @@ def getImagesByUser(request, pk):
 @permission_classes([IsAuthenticated, ])
 def uploadImage(request):
     if(request.method == 'POST'):
+        print(request)
+        print(request.body)
+
         if('image' in request.FILES):
             photo_path_ = uploadImageUser(request.user.username, request.FILES['image'])
 
