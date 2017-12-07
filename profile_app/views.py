@@ -25,7 +25,7 @@ def addAvatar(request, pk):
             user.save()
 
             imageName = photo.photo_path.replace(getVariable('s3BucketPath'), '')
-            photo.photo_small_path = cropImage(imageName)
+            photo.photo_small_path = getVariable('s3BucketPath') + cropImage(imageName)
             photo.save()
 
             return HttpResponse(status=200)
