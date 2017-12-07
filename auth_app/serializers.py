@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import User, Follows
 
-from photo_app.serializers import PhotoAvatarSerializer
+from photo_app.models import Photo
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,8 +37,17 @@ class FollowsSerializer(serializers.ModelSerializer):
             'following'
         )
 
+class AvatarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = (
+            'id',
+            'photo_path',
+            'photo_small_path',
+        )
+
 class UserPhotoSerializer(serializers.ModelSerializer):
-    photo = PhotoAvatarSerializer
+    photo = AvatarSerializer()
     class Meta:
         model = User
         fields = (

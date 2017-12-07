@@ -38,15 +38,6 @@ class PhotoSerializer(serializers.ModelSerializer):
             'likes'
         )
 
-class PhotoAvatarSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Photo
-        fields = (
-            'id',
-            'photo_path',
-            'photo_small_path',
-        )
-
 class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
