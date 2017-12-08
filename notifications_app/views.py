@@ -13,11 +13,11 @@ from AWS.dynamoDB import getNotifications
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication, ])
 @permission_classes([IsAuthenticated, ])
-def getNotifications(request, pk):
+def getUserNotifications(request, pk):
     if(request.method == 'GET'):
         res = getNotifications(userId=pk)
         print(res)
-        return HttpResponse(status=200)
+        return Response(res, status=status.HTTP_200_OK)
     return HttpResponse(status=400)
 
 
