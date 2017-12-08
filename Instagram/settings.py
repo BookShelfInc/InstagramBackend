@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'auth_app',
     'photo_app',
     'profile_app',
+    'notifications_app',
 ]
 
 MIDDLEWARE = [

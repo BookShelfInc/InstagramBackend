@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^auth/', include('auth_app.urls')),
     url(r'^photo/', include('photo_app.urls')),
     url(r'^profile/', include('profile_app.urls')),
+    url(r'^notifications/', include('notifications_app.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
