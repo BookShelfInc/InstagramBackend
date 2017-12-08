@@ -1,3 +1,4 @@
+from rest_framework.fields import IntegerField, CharField
 from rest_framework import serializers
 
 from .models import User, Follows
@@ -55,4 +56,22 @@ class UserPhotoSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'photo'
+        )
+
+class UserPageSerializer(serializers.ModelSerializer):
+    count_following = IntegerField(source='following.count')
+    count_followers = IntegerField(source='followed_by.count')
+
+    photo = AvatarSerializer()
+
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'bio',
+            'count_followers',
+            'count_following',
+            'photo',
+            'owner'
         )

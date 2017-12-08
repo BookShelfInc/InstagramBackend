@@ -6,7 +6,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from .models import User
-from .serializers import UserSerializer, UserPhotoSerializer
+from .serializers import UserSerializer, UserPhotoSerializer, UserPageSerializer
 
 def register(request):
     if(request.method == 'POST'):
@@ -37,4 +37,14 @@ def getAllUsers(request):
         allUsers = User.objects.all()
         serialized = UserPhotoSerializer(allUsers, many=True)
         return JsonResponse(serialized.data, status=status.HTTP_200_OK, safe=False)
+    return HttpResponse(status=400)
+
+@api_view(['GET'])
+@authentication_classes([JSONWebTokenAuthentication, ])
+@permission_classes([IsAuthenticated, ])
+def getUserPage(request, pk):
+    if(request.method == 'GET'):
+        user = User.objects.get(pk=pk)
+        serialized = UserPageSerializer(user)
+        return JsonResponse(serialized.data, status=status.HTTP_200_OK)
     return HttpResponse(status=400)
