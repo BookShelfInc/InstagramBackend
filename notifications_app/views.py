@@ -2,6 +2,7 @@ import itertools
 from operator import itemgetter
 from django.http import HttpResponse, JsonResponse
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.decorators import permission_classes, authentication_classes, api_view
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.parsers import JSONParser, MultiPartParser
@@ -14,8 +15,8 @@ from AWS.dynamoDB import getNotifications
 @permission_classes([IsAuthenticated, ])
 def getNotifications(request, pk):
     if(request.method == 'GET'):
-        res = getNotifications(pk)
-        return JsonResponse(res)
+        res = getNotifications(userId=pk)
+        return Response(res)
     return HttpResponse(status=400)
 
 
