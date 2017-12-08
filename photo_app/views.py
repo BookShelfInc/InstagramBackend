@@ -104,7 +104,7 @@ def createComment(request):
             commentt = Comment.objects.filter(author_id=author_id, photo_id=photo_id)[0]
 
             photoObj = Photo.objects.get(pk=photo_id)
-            postComment(commentt.id, commentt.comment, author_id, photo_id, photoObj.user_id)
+            postComment(commentt.id, commentt.comment, author_id, photo_id, photoObj.user_id.id)
 
             return JsonResponse(serialized.data, status=status.HTTP_201_CREATED)
         else:
