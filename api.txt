@@ -1,0 +1,87 @@
+baseUrl = http://ec2-18-216-108-42.us-east-2.compute.amazonaws.com
+
+1) "Auth"
+POST auth/register/
+{
+    "username":
+    "email":
+    "password":
+}
+
+POST auth/login/
+{
+    "username":
+    "password":
+}
+
+GET /auth/info/
+returns
+{
+    "id":,
+    "username": ,
+    "email": ,
+    "photo": {
+        "id": ,
+        "photo_path": ,
+        "photo_small_path":
+    }
+}
+
+
+2) "Photo"
+GET photo/my/      returns user images
+{
+     "id": ,
+     "photo_path": ,
+     "photo_small_path": ,
+     "description": ,
+     "publish_date": ,
+     "user_id": 2,
+     "comments": [],
+     "likes": []
+}
+
+GET photo/feed/             returns images as prev method
+
+GET photo/interesting/      same functions as prev
+
+GET photo/userphotos/{id}     returns photos of particular user
+
+POST photo/uploadimage/     upload photo, multipart/data
+
+POST photo/createcomment/   create comment
+{
+    "comment":
+    "author": // user id
+    "photo":  //photo id
+}
+
+POST photo/deletecomment/{id}/       delete particular comment (id = comment id)
+
+POST photo/like/id       like photo (id = photo id)
+
+
+3) "Profile"
+
+GET profile/followers/
+{
+    "id",
+    "username",
+    "email"
+}
+
+GET profile/following/
+
+POST profile/follow/{id}/    id = user id
+
+POST profile/unfollow/{id}/    id = user id
+
+POST profile/approve/{id}/    id = user id
+
+POST profile/makepublic/
+
+POST profile/makeprivate/
+
+POST profile/addavatar/{id}/    id = image id
+
+POST profile/deleteavatar/

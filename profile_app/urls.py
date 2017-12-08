@@ -12,6 +12,6 @@ urlpatterns = [
     url(r'^approve/(?P<pk>[0-9]+)/$', approveFollower),
     url(r'^makeprivate/$', makePrivate),
     url(r'^makepublic/$', makePublic),
-    url(r'^addavatar/(?P<pk>[0-9]+)/$', addAvatar),
+    url(r'^addavatar/$', addAvatar),
     url(r'^deleteavatar/$', deleteAvatar),
 ]

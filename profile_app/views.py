@@ -12,24 +12,47 @@ from photo_app.models import Photo
 
 from AWS.env_variables import getVariable
 from AWS.api_gateway import cropImage
+from AWS.aws_s3 import uploadImageUser
+
+# @api_view(['POST'])
+# @authentication_classes([JSONWebTokenAuthentication, ])
+# @permission_classes([IsAuthenticated, ])
+# def addAvatar(request, pk):
+#     if (request.method == 'POST'):
+#         user = request.user
+#         try:
+#             photo = Photo.objects.get(pk=pk)
+#             user.photo = photo
+#             user.save()
+#
+#             imageName = photo.photo_path.replace(getVariable('s3BucketPath'), '')
+#             photo.photo_small_path = getVariable('s3BucketPath') + cropImage(imageName)[1:-1]
+#             photo.save()
+#
+#             return HttpResponse(status=200)
+#         except Photo.DoesNotExist:
+#             return HttpResponse(status=404)
+#     return HttpResponse(status=400)
 
 @api_view(['POST'])
 @authentication_classes([JSONWebTokenAuthentication, ])
 @permission_classes([IsAuthenticated, ])
-def addAvatar(request, pk):
-    if (request.method == 'POST'):
-        user = request.user
-        try:
-            photo = Photo.objects.get(pk=pk)
+def addAvatar(request):
+    if(request.method == 'POST'):
+        if('image' in request.FILES):
+            photo_path_ = uploadImageUser(request.user.username, request.FILES['image'])
+            imageName = photo_path_.replace(getVariable('s3BucketPath'), '')
+            photo_small_path_ = getVariable('s3BucketPath') + cropImage(imageName)[1:-1]
+
+            photo = Photo(user_id=request.user, photo_path=photo_path_, photo_small_path=photo_small_path_)
+            photo.save()
+
+            user = request.user
             user.photo = photo
             user.save()
 
-            imageName = photo.photo_path.replace(getVariable('s3BucketPath'), '')
-            photo.photo_small_path = getVariable('s3BucketPath') + cropImage(imageName)[1:-1]
-            photo.save()
-
             return HttpResponse(status=200)
-        except Photo.DoesNotExist:
+        else:
             return HttpResponse(status=404)
     return HttpResponse(status=400)
 
