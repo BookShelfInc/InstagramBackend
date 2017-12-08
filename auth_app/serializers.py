@@ -58,8 +58,17 @@ class UserPhotoSerializer(serializers.ModelSerializer):
             'photo'
         )
 
-class UserPageSerializer(serializers.ModelSerializer):
+class FollowPageSerializer(serializers.ModelSerializer):
     count_following = IntegerField(source='following.count')
+    class Meta:
+        model = Follows
+        fields = (
+            'count_following'
+        )
+
+class UserPageSerializer(serializers.ModelSerializer):
+
+    count_following = FollowPageSerializer()
     count_followers = IntegerField(source='followed_by.count')
 
     photo = AvatarSerializer()
