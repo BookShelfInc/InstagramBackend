@@ -17,7 +17,7 @@ def getNotifications(request, pk):
     if(request.method == 'GET'):
         res = getNotifications(userId=pk)
         print(res)
-        return Response(res)
+        return HttpResponse(status=200)
     return HttpResponse(status=400)
 
 
