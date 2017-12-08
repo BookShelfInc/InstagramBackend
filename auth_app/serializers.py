@@ -78,7 +78,7 @@ class PhotoPageSerializer(serializers.ModelSerializer):
         )
 
 class UserPageSerializer(serializers.ModelSerializer):
-    owner = PhotoPageSerializer()
+    owner = PhotoPageSerializer(many=True)
     # profile = FollowPageSerializer()
     count_followers = IntegerField(source='followed_by.count')
 
