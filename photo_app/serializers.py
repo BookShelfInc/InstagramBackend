@@ -66,6 +66,9 @@ class CommentCreateSerializer(serializers.ModelSerializer):
             'author',
             'photo'
         )
+        extra_kwargs = {
+            'password': {'read_only': True},
+        }
 
 class LikeCreateSerializer(serializers.ModelSerializer):
     class Meta:
