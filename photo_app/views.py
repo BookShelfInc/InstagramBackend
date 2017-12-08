@@ -99,7 +99,12 @@ def createComment(request):
         if(serialized.is_valid()):
             serialized.save()
 
-            print(serialized)
+            author_id = serialized.data['author']
+            photo_id = serialized.data['photo']
+            commentt = Comment.objects.filter(author_id=author_id, photo_id=photo_id)[0]
+
+            photoObj = Photo.objects.get(pk=photo_id)
+            postComment(commentt.id, commentt.comment, author_id, photo_id, photoObj.user_id)
 
             return JsonResponse(serialized.data, status=status.HTTP_201_CREATED)
         else:
