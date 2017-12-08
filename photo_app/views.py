@@ -12,6 +12,7 @@ from .models import Photo, Comment, Like
 from .serializers import PhotoSerializer, CommentCreateSerializer
 
 from AWS.aws_s3 import uploadImageUser
+from AWS.dynamoDB import postComment
 
 @api_view(['GET'])
 @authentication_classes([JSONWebTokenAuthentication, ])
@@ -97,6 +98,9 @@ def createComment(request):
         serialized = CommentCreateSerializer(data=data)
         if(serialized.is_valid()):
             serialized.save()
+
+            print(serialized)
+
             return JsonResponse(serialized.data, status=status.HTTP_201_CREATED)
         else:
             return JsonResponse(serialized.errors, status=status.HTTP_400_BAD_REQUEST)
