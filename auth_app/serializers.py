@@ -63,12 +63,12 @@ class FollowPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follows
         fields = (
-            'count_following'
+            'count_following',
         )
 
 class UserPageSerializer(serializers.ModelSerializer):
 
-    profile = FollowPageSerializer()
+    # profile = FollowPageSerializer()
     count_followers = IntegerField(source='followed_by.count')
 
     photo = AvatarSerializer()
@@ -80,7 +80,7 @@ class UserPageSerializer(serializers.ModelSerializer):
             'username',
             'bio',
             'count_followers',
-            'profile',
+            # 'profile',
             'photo',
-            'owner'
+            'owner',
         )
