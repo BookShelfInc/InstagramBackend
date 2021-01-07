@@ -24,7 +24,7 @@ incremental==16.10.1
 itsdangerous==0.24
 Jinja2==2.9.5
 jmespath==0.9.3
-lxml==4.0.0
+lxml==4.6.2
 Markdown==2.6.8
 MarkupSafe==0.23
 msgpack-python==0.4.8
