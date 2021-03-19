@@ -14,7 +14,7 @@ daphne==1.2.0
 Django==1.11
 django-cors-headers==2.0.2
 django-filter==1.0.2
-djangorestframework==3.6.2
+djangorestframework==3.11.2
 djangorestframework-jwt==1.10.0
 docutils==0.14
 docxtpl==0.3.2
