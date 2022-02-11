@@ -39,7 +39,7 @@ redis==2.10.5
 requests==2.18.4
 s3transfer==0.1.11
 six==1.10.0
-Twisted==17.1.0
+Twisted==22.1.0
 txaio==2.7.0
 urllib3==1.22
 websocket-client==0.40.0
